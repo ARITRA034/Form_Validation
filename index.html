@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h2>Validation check</h2>
+
+    <form onsubmit="return addData()">
+        
+        <label for="fname">First Name :</label>
+        <input type="text" id="name1" required>
+        <br>
+        <span id="sp1"></span>
+        <br><br>
+        <label for="lname">Last Name :</label>
+        <input type="text" id="name2" required>
+        <br>
+        <span id="sp2"></span>
+        <br><br>
+        <label for="mail">Enter email id:</label>
+        <input type="text" id="mail" required>
+        <br>
+        <span id="sp3"></span>
+        <br><br>
+        <label for="pass"> Password</label>
+        <input type="text" id="pass" required>
+        <br>
+        <span id="sp4"></span>
+        <br><br>
+        <label for="ph">Phone no:</label>
+        <input type="number" id="ph" required>
+        <br>
+        <span id="sp5"></span>
+        <br><br>
+        <label for="gender">Gender :</label>
+        <input type="radio" id="male" name="gender" value="mail">Male
+        <input type="radio" id="female" name="gender" value="mail">Female
+        <br>
+        <span id="sp6"></span>
+        <br><br>
+        <label for="hobbies">Hobbies :</label>
+        <br>
+        <input type="checkbox" id="reading" name="hobbies" value="reading">Reading
+        <input type="checkbox" id="sports" name="hobbies" value="sports">Sports
+        <input type="checkbox" id="music" name="hobbies" value="music">Music
+        <br>
+        <span id="sp7"></span>
+        <br><br>
+        <input type="submit" value="submit">
+    </form>
+    
+
+    
+
+
+    <script>
+        function addData()
+        {
+            var flag = true;
+            // var nameRegex = /[^a-z|^A-Z]/;
+            // var nameRegex = /^[A-Za-z. ]{3,20}$/
+            var fnameRegex = /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/
+            var lnameRegex = /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/
+            var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,20}$/;
+            var phRegex = /^\d{10}$/
+
+            var fnameCheck = document.getElementById("name1").value;
+            var lnameCheck = document.getElementById("name2").value;
+            var emailCheck = document.getElementById("mail").value;
+            var passwordCheck = document.getElementById("pass").value;
+            var phone = document.getElementById("ph").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var hobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+
+            //for fname check
+            if(fnameRegex.test(fnameCheck) == false)
+            {
+                document.getElementById('sp1').innerHTML = 'Give a correct name!'
+                // return false;
+                flag = false;
+            }
+            else
+            {
+                document.getElementById('sp1').innerHTML = ''
+            }
+
+            //for lname check
+            if(lnameRegex.test(lnameCheck) == false)
+            {
+                document.getElementById('sp2').innerHTML = 'Give a correct name!'
+                // return false;
+                flag = false;
+            }
+            else
+            {
+                document.getElementById('sp2').innerHTML = ''
+            }
+
+            //for email check
+            if(emailRegex.test(emailCheck) == false)
+            {
+                document.getElementById('sp3').innerHTML = `Invalid email!`
+                // return false;
+                flag = false;
+                
+            }
+            else
+            {
+                document.getElementById('sp3').innerHTML = ''
+            }
+            
+            //for password check
+            if(passwordRegex.test(passwordCheck) == false)
+            {
+                document.getElementById('sp4').innerHTML = 'Give a correct password format !'
+                return false;
+            }
+            else
+            {
+                document.getElementById('sp4').innerHTML = ''
+            }
+            
+            //for phone no check
+            if(phRegex.test(phone) == false)
+            {
+                document.getElementById('sp5').innerHTML = `Invalid Phone no!`
+                // return false;
+                flag = false;
+            }
+            else
+            {
+                document.getElementById('sp5').innerHTML = ''
+            }
+
+            if(!gender)
+            {
+                document.getElementById('sp6').innerHTML = 'Gender is required!'
+                flag = false;
+            }
+            else
+            {
+                document.getElementById('sp6').innerHTML = ''
+            }
+
+            if(hobbies.length === 0)
+            {
+                document.getElementById('sp7').innerHTML = 'Select atleast one hobby!';
+                flag = false
+            }
+            else
+            {
+                document.getElementById('sp7').innerHTML = ''
+            }
+
+
+            if(flag == true)
+            {
+                alert('Submission Successfull !! . . .')
+            }
+            return flag;
+        }
+    </script>
+</body>
+</html>
